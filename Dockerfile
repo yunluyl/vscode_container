@@ -48,7 +48,7 @@ RUN apt install -y \
     rm -rf /var/lib/apt/lists/*
 
 # Install VSCode
-curl -fsSL https://code-server.dev/install.sh | sh
+RUN curl -fsSL https://code-server.dev/install.sh | sh
 COPY ./vscode_config.yaml /root/.config/code-server/config.yaml
 
 # Install gcsfuse and gcloud, implicitly installs python2.7
@@ -60,12 +60,6 @@ RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
     apt update -y && \
     apt install google-cloud-sdk gcsfuse -y && \
     rm -rf /var/lib/apt/lists/*
-
-# Install conda
-ENV ANACONDA_PYTHON_VERSION="3.7"
-ENV DL_ANACONDA_HOME="/opt/conda"
-RUN /opt/google/conda/provision_conda.sh
-ENV PATH="/opt/conda/bin:${PATH}"
 
 # Configs for VSCode server
 ENV SHELL="/bin/bash"

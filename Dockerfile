@@ -56,6 +56,7 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && \
 RUN wget -q "https://golang.org/dl/go${GO_VERSION}.linux-amd64.tar.gz" -O go_install.tar.gz && \
     tar -C /usr/local -xzf ./go_install.tar.gz && \
     export PATH=$PATH:/usr/local/go/bin && \
+    echo "export PATH=\$PATH:/usr/local/go/bin" | tee -a /root/.bashrc && \
     rm -f go_install.tar.gz
 
 # Install VSCode

@@ -68,6 +68,9 @@ RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
     apt update && \
     apt install -y docker-ce docker-ce-cli containerd.io
 
+# Install Firebase CLI
+RUN curl -sL https://firebase.tools | bash
+
 # Install gcsfuse and gcloud, implicitly installs python2.7
 RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
     echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \

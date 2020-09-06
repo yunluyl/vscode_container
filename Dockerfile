@@ -1,5 +1,7 @@
 FROM ubuntu:18.04
 
+ARG GO_VERSION=1.15.1
+
 ENV LC_ALL C.UTF-8
 ENV LANG C.UTF-8
 
@@ -47,9 +49,15 @@ RUN apt install -y \
       && \
     rm -rf /var/lib/apt/lists/*
 
+# Install Go
+RUN wget "https://golang.org/dl/go${GO_VERSION}.linux-amd64.tar.gz" -O go_install.tar.gz && \
+    tar -C /usr/local -xzf ./go_install.tar.gz && \
+    export PATH=$PATH:/usr/local/go/bin && \
+    rm -f go_install.tar.gz
+
 # Install VSCode
 RUN curl -fsSL https://code-server.dev/install.sh | sh
-COPY ./vscode_config.yaml /root/.config/code-server/config.yaml
+COPY ./vscode_config.yaml /home/vscode/config.yaml
 
 # Install gcsfuse and gcloud, implicitly installs python2.7
 RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
@@ -63,6 +71,6 @@ RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
 
 # Configs for VSCode server
 ENV SHELL="/bin/bash"
-EXPOSE 80
-CMD ["code-server"]
+EXPOSE 8080
+CMD ["code-server", "--config", "/home/vscode/config.yaml"]
 

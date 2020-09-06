@@ -43,11 +43,14 @@ RUN apt install -y \
   pandoc \
   texlive-xetex \
   inotify-tools \
-  npm \
-  nodejs \
-  yarn \
       && \
     rm -rf /var/lib/apt/lists/*
+
+# Install node and yarn
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list && \
+    apt update && \
+    apt install -y yarn
 
 # Install Go
 RUN wget -q "https://golang.org/dl/go${GO_VERSION}.linux-amd64.tar.gz" -O go_install.tar.gz && \
@@ -79,4 +82,3 @@ RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
 ENV SHELL="/bin/bash"
 EXPOSE 8080
 CMD ["code-server"]
-

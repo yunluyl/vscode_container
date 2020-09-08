@@ -43,6 +43,7 @@ RUN apt install -y \
   pandoc \
   texlive-xetex \
   inotify-tools \
+  lsof \
       && \
     rm -rf /var/lib/apt/lists/*
 

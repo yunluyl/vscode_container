@@ -44,6 +44,7 @@ RUN apt install -y \
   texlive-xetex \
   inotify-tools \
   lsof \
+  python3-venv \
       && \
     rm -rf /var/lib/apt/lists/*
 

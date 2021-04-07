@@ -1,1 +1,1 @@
-docker run -d --network=host --restart=always codeserver:latest
+docker run -d --init --network=host --restart=always --privileged -v /var/run/docker.sock:/var/run/docker.sock -v /var/run/dbus:/var/run/dbus 587413328198.dkr.ecr.us-west-1.amazonaws.com/codeserver:latest

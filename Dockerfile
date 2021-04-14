@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM registry.tusimple.ai/base:16.04
 
 ARG GO_VERSION=1.15.1
 
@@ -70,19 +70,6 @@ RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs)  stable" && \
     apt update && \
     apt install -y docker-ce docker-ce-cli containerd.io
-
-# Install Firebase CLI
-RUN curl -sL https://firebase.tools | bash
-
-# Install gcsfuse and gcloud, implicitly installs python2.7
-RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
-    echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
-    export GCSFUSE_REPO="gcsfuse-$(lsb_release -c -s)" && \
-    echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | tee -a /etc/apt/sources.list.d/gcsfuse.list && \
-    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
-    apt update -y && \
-    apt install google-cloud-sdk gcsfuse -y && \
-    rm -rf /var/lib/apt/lists/*
 
 # Configs for VSCode server
 ENV SHELL="/bin/bash"

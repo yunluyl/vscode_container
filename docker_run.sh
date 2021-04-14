@@ -1,1 +1,1 @@
-docker run -d --name=code-server --init --network=host --restart=always --privileged -v /home/ec2-user:/root -v /var/run/docker.sock:/var/run/docker.sock -v /var/run/dbus:/var/run/dbus 587413328198.dkr.ecr.us-west-1.amazonaws.com/codeserver:latest
+docker run -d --name=code-server --init --network=host --restart=always --privileged -v /Users/yun.lu/.ssh:/root/.ssh -v /var/run/docker.sock:/var/run/docker.sock registry.tusimple.ai/yunlu-vscode:latest

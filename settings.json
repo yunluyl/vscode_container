@@ -1,0 +1,16 @@
+{
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.colorTheme": "Default Dark+",
+    "editor.fontSize": 14,
+    "terminal.integrated.fontSize": 14,
+    "window.openFoldersInNewWindow": "on",
+    "git.confirmSync": false,
+    "editor.parameterHints.enabled": false,
+    "explorer.confirmDragAndDrop": false,
+    "workbench.editorAssociations": [
+        {
+            "viewType": "jupyter.notebook.ipynb",
+            "filenamePattern": "*.ipynb"
+        }
+    ]
+}

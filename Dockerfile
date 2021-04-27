@@ -64,6 +64,7 @@ RUN wget -q "https://golang.org/dl/go${GO_VERSION}.linux-amd64.tar.gz" -O go_ins
 # Install VSCode
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 COPY ./vscode_config.yaml /root/.config/code-server/config.yaml
+COPY ./settings.json /root/.local/share/code-server/User/settings.json
 
 # Install Docker
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && \
@@ -71,7 +72,14 @@ RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
     apt update && \
     apt install -y docker-ce docker-ce-cli containerd.io
 
+# Install AWS CLI
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.0.30.zip" -o "awscliv2.zip" && \
+    unzip awscliv2.zip && \
+    ./aws/install && \
+    rm -f awscliv2.zip && \
+    rm -rf ./aws
+
 # Configs for VSCode server
 ENV SHELL="/bin/bash"
-EXPOSE 8080
+EXPOSE 443
 CMD ["code-server"]

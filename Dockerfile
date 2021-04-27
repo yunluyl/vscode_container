@@ -6,7 +6,7 @@ ENV LC_ALL C.UTF-8
 ENV LANG C.UTF-8
 
 ARG DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y
+RUN rm ~/.aws/credential && sapt-get update && apt-get upgrade -y && apt-get dist-upgrade -y
 # Core packages
 RUN apt install -y \
   apt-transport-https \

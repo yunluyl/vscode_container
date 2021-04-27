@@ -1,1 +1,1 @@
-docker run -d --name=code-server --init --network=host --restart=always --privileged -v /Users/yun.lu/.ssh:/root/.ssh -v /var/run/docker.sock:/var/run/docker.sock registry.tusimple.ai/yunlu-vscode:latest
+docker run -d --name=code-server --init -p 8080:8080 -h yunlu-vscode --restart=always --privileged -v /Users/yun.lu/.ssh:/root/.ssh -v /var/run/docker.sock:/var/run/docker.sock registry.tusimple.ai/yunlu-vscode:latest

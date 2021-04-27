@@ -1,5 +1,4 @@
 bind-addr: 0.0.0.0:443
 auth: password
-password: ky63624507
 cert: true
 cert-host: vscode.tusimple.ai

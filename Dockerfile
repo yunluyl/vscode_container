@@ -82,4 +82,4 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.0.30.zip" -o "a
 # Configs for VSCode server
 ENV SHELL="/bin/bash"
 EXPOSE 443
-CMD ["code-server"]
+ENTRYPOINT ["code-server"]

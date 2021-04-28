@@ -6,7 +6,7 @@ ENV LC_ALL C.UTF-8
 ENV LANG C.UTF-8
 
 ARG DEBIAN_FRONTEND=noninteractive
-RUN rm -f /root/.aws/credential && sapt-get update && apt-get upgrade -y && apt-get dist-upgrade -y
+RUN rm -f /root/.aws/credentials && sapt-get update && apt-get upgrade -y && apt-get dist-upgrade -y
 # Core packages
 RUN apt install -y \
   apt-transport-https \
@@ -65,6 +65,7 @@ RUN wget -q "https://golang.org/dl/go${GO_VERSION}.linux-amd64.tar.gz" -O go_ins
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 COPY ./vscode_config.yaml /root/.config/code-server/config.yaml
 COPY ./settings.json /root/.local/share/code-server/User/settings.json
+COPY ./entrypoint.sh /root/entrypoint.sh
 
 # Install Docker
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && \
@@ -79,7 +80,11 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.0.30.zip" -o "a
     rm -f awscliv2.zip && \
     rm -rf ./aws
 
+# Create folder for SSL certificates
+RUN mkdir -p /root/.config/code-server/ssl && \
+    chmod +x /root/entrypoint.sh
+
 # Configs for VSCode server
 ENV SHELL="/bin/bash"
 EXPOSE 443
-ENTRYPOINT ["code-server"]
+ENTRYPOINT ["/root/entrypoint.sh"]

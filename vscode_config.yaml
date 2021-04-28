@@ -1,4 +1,4 @@
 bind-addr: 0.0.0.0:443
 auth: password
-cert: true
-cert-host: vscode.tusimple.ai
+cert: /root/.config/code-server/ssl/vscode.tusimple.ai.crt
+cert-key: /root/.config/code-server/ssl/vscode.tusimple.ai.key
